@@ -13,15 +13,52 @@ fetch(apiUrl, {
     data.forEach((product) => {
       const col = document.createElement("div");
       col.className = "col-md-4";
-      col.innerHTML = `
-            <div class="card mb-4 shadow-sm">
-              <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-              <div class="card-body">
-                <h5 class="card-title">${product.name}</h5>
-                <p class="card-text">${product.price} 💲</p>
-              </div>
-            </div>
-          `;
+
+      const card = document.createElement("div");
+      card.className = "card mb-4 shadow-sm";
+
+      const img = document.createElement("img");
+      img.src = product.imageUrl;
+      img.className = "card-img-top";
+      img.alt = product.name;
+
+      const cardBody = document.createElement("div");
+      cardBody.className = "card-body";
+
+      const cardTitle = document.createElement("h5");
+      cardTitle.className = "card-title";
+      cardTitle.textContent = product.name;
+
+      const cardText = document.createElement("p");
+      cardText.className = "card-text";
+      cardText.textContent = `${product.price} 💲`;
+
+      const buttonContainer = document.createElement("div");
+      buttonContainer.className = "d-flex justify-content-between";
+
+      const editButton = document.createElement("button");
+      editButton.className = "btn btn-secondary";
+      editButton.textContent = "Modifica 🔧";
+      editButton.onclick = () => {
+        window.location.href = `./backoffice.html?productId=${product._id}`;
+      };
+
+      const detailsLink = document.createElement("a");
+      detailsLink.className = "link-secondary";
+      detailsLink.textContent = "Dettagli";
+      detailsLink.href = `./dettagli.html?productId=${product._id}`;
+
+      buttonContainer.appendChild(editButton);
+      buttonContainer.appendChild(detailsLink);
+
+      cardBody.appendChild(cardTitle);
+      cardBody.appendChild(cardText);
+      cardBody.appendChild(buttonContainer);
+
+      card.appendChild(img);
+      card.appendChild(cardBody);
+
+      col.appendChild(card);
       mainRow.appendChild(col);
     });
   })
