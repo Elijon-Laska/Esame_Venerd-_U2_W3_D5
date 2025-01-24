@@ -10,9 +10,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const delBtn = document.getElementById("delete-btn");
 
   if (carsId) {
-    submitBtn.innerText = "Modifica appuntamento";
+    submitBtn.innerText = "Modifica auto";
     submitBtn.classList.add("btn-success");
-    subtitle.innerText = "— Modifica appuntamento";
+    subtitle.innerText = "La tua Auto";
     delBtn.classList.remove("d-none");
     delBtn.onclick = handleDelete;
     fetch(URL)
@@ -30,7 +30,7 @@ window.addEventListener("DOMContentLoaded", () => {
         form.elements.price.value = appointment.price;
       });
   } else {
-    submitBtn.innerText = "Aggiungi appuntamento";
+    submitBtn.innerText = "Aggiungi auto";
     submitBtn.classList.add("btn-primary");
   }
 });
@@ -75,7 +75,7 @@ form.onsubmit = function (event) {
 };
 
 const handleDelete = () => {
-  const hasConfirmed = confirm("sei sicuro di voler eliminare l'appuntamento?");
+  const hasConfirmed = confirm("sei sicuro di voler eliminare la macchina?");
 
   if (hasConfirmed) {
     fetch(URL, { method: "DELETE", headers: { Authorization: `Bearer ${token}` } })
